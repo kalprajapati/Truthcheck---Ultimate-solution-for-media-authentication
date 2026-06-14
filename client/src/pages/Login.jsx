@@ -7,6 +7,7 @@ import { Mail, Lock, LogIn, Loader2 } from 'lucide-react';
 import axios from 'axios';
 
 const Login = () => {
+    let API_URL = import.meta.env.API_URL;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
             login(res.data);
             navigate('/');
         } catch (err) {

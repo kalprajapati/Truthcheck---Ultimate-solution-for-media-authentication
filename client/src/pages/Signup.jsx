@@ -7,6 +7,7 @@ import { User, Mail, Lock, UserPlus, Loader2 } from 'lucide-react';
 import axios from 'axios';
 
 const Signup = () => {
+    let API_URL = import.meta.env.API_URL;
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/signup', { name, email, password });
+            const res = await axios.post(`${API_URL}/api/auth/signup`, { name, email, password });
             login(res.data); // Login the user immediately after signup
             navigate('/');
         } catch (err) {

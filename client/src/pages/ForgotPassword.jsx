@@ -5,7 +5,10 @@ import Footer from '../components/Footer';
 import { Mail, Lock, KeyRound, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
 import axios from 'axios';
 
+
+
 const ForgotPassword = () => {
+    let API_URL = import.meta.env.API_URL;
     const [step, setStep] = useState(1); // 1: Email, 2: Code, 3: New Password, 4: Success
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
@@ -21,7 +24,7 @@ const ForgotPassword = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/auth/forgotpassword', { email });
+            await axios.post(`${API_URL}/api/auth/forgotpassword`, { email });
             setStep(2);
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to send code');
@@ -35,7 +38,7 @@ const ForgotPassword = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/auth/verifycode', { email, code });
+            await axios.post(`${API_URL}/api/auth/verifycode`, { email, code });
             setStep(3);
         } catch (err) {
             setError(err.response?.data?.msg || 'Invalid or expired code');
@@ -49,7 +52,7 @@ const ForgotPassword = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/auth/resetpassword', { email, code, newPassword });
+            await axios.post(`${API_URL}/api/auth/resetpassword`, { email, code, newPassword });
             setStep(4);
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to reset password');
