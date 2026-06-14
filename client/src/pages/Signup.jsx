@@ -1,13 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/auth';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { User, Mail, Lock, UserPlus, Loader2 } from 'lucide-react';
-import axios from 'axios';
+import api from '../services/api';
 
 const Signup = () => {
-    let API_URL = import.meta.env.API_URL;
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,7 +22,7 @@ const Signup = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post(`${API_URL}/api/auth/signup`, { name, email, password });
+            const res = await api.post('/auth/signup', { name, email, password });
             login(res.data); // Login the user immediately after signup
             navigate('/');
         } catch (err) {

@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL;;
+const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: `${API_ORIGIN}/api`,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -26,7 +26,7 @@ api.interceptors.request.use((config) => {
 
 export const analyzeMedia = async (formData) => {
     try {
-        const response = await api.post('/media', formData, {
+        const response = await api.post('/analyze/media', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -39,7 +39,7 @@ export const analyzeMedia = async (formData) => {
 
 export const analyzeText = async (text) => {
     try {
-        const response = await api.post('/text', { text });
+        const response = await api.post('/analyze/text', { text });
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
@@ -48,7 +48,7 @@ export const analyzeText = async (text) => {
 
 export const getReport = async (id) => {
     try {
-        const response = await api.get(`/report/${id}`);
+        const response = await api.get(`/analyze/report/${id}`);
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
@@ -57,9 +57,11 @@ export const getReport = async (id) => {
 
 export const getHistory = async () => {
     try {
-        const response = await api.get('/history');
+        const response = await api.get('/analyze/history');
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : error;
     }
 };
+
+export default api;

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { UploadCloud, FileVideo, Image as ImageIcon, X } from 'lucide-react';
 
 const FileUpload = ({ onFileSelect }) => {

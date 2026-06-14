@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loader from '../components/Loader';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/auth';
 import { getHistory } from '../services/api';
 import { FileText, Image as ImageIcon, Video, ShieldCheck, AlertTriangle, XCircle, ChevronRight, Clock, Search } from 'lucide-react';
 

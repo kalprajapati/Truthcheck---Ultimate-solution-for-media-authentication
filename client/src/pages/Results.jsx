@@ -99,7 +99,6 @@ const Results = () => {
     // Logic for status
     const isTrusted = report.trustScore >= 80;
     const isSuspicious = report.trustScore < 50;
-    const isCaution = !isTrusted && !isSuspicious;
 
     const statusConfig = {
         trusted: { color: 'text-status-success', bg: 'bg-status-success/10', border: 'border-status-success/20', icon: Verified, label: 'Authentic Content' },

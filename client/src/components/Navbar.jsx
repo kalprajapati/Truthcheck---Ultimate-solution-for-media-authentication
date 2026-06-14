@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShieldCheck, Menu, X, LogOut } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/auth';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);

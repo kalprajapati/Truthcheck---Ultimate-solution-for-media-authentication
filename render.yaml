@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: truthcheck-api
+    env: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URLS
+        sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GOOGLE_FACT_CHECK_KEY
+        sync: false
+      - key: DEEPWARE_API_KEY
+        sync: false

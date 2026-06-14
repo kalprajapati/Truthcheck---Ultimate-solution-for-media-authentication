@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Mail, Lock, KeyRound, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react';
-import axios from 'axios';
+import api from '../services/api';
 
 
 
 const ForgotPassword = () => {
-    let API_URL = import.meta.env.API_URL;
     const [step, setStep] = useState(1); // 1: Email, 2: Code, 3: New Password, 4: Success
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
@@ -17,14 +16,12 @@ const ForgotPassword = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     
-    const navigate = useNavigate();
-
     const handleSendCode = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
         try {
-            await axios.post(`${API_URL}/api/auth/forgotpassword`, { email });
+            await api.post('/auth/forgotpassword', { email });
             setStep(2);
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to send code');
@@ -38,7 +35,7 @@ const ForgotPassword = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post(`${API_URL}/api/auth/verifycode`, { email, code });
+            await api.post('/auth/verifycode', { email, code });
             setStep(3);
         } catch (err) {
             setError(err.response?.data?.msg || 'Invalid or expired code');
@@ -52,7 +49,7 @@ const ForgotPassword = () => {
         setError('');
         setLoading(true);
         try {
-            await axios.post(`${API_URL}/api/auth/resetpassword`, { email, code, newPassword });
+            await api.post('/auth/resetpassword', { email, code, newPassword });
             setStep(4);
         } catch (err) {
             setError(err.response?.data?.msg || 'Failed to reset password');
