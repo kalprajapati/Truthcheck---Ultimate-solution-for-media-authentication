@@ -12,7 +12,12 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://truthcheck-brown.vercel.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Ensure uploads directory exists
